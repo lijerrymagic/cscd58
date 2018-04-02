@@ -1,5 +1,6 @@
 #encoding:utf-8
 class Topology:
+    '''A topology class contains all hardcoding network configuration'''
     def __init__(self):
         self.topo = {
             'node': [
@@ -114,7 +115,9 @@ class Topology:
         links = self.topo['link']
         interface_list = []
         for link in links:
+            # Find src_node_name in link[src_node] and make sure src_itf and dst_itf are not null
             if src_node_name == link['src_node'] and link['src_itf'] and link['dst_itf']:
+                # Find ip for 2 interface
                 nw_src = self.get_node_ip(link['src_node'], link['src_itf'])
                 nw_dst = self.get_node_ip(link['dst_node'], link['dst_itf'])
                 if nw_src and nw_dst:
@@ -122,8 +125,9 @@ class Topology:
                         'nw_src': nw_src,
                         'nw_dst': nw_dst
                     })
-
+            # Find src_node_name in link[dst_node] and make sure src_itf and dst_itf are not null
             elif src_node_name == link['dst_node'] and link['src_itf'] and link['dst_itf']:
+                # Find ip for 2 interface
                 nw_src = self.get_node_ip(link['dst_node'], link['dst_itf'])
                 nw_dst = self.get_node_ip(link['src_node'], link['src_itf'])
                 if nw_src and nw_dst:
@@ -133,6 +137,7 @@ class Topology:
                     })
         return interface_list
 
+    # Find information of node in topo
     def get_node_info(self, node_name):
         nodes = self.topo['node']
         for node in nodes:
@@ -140,6 +145,7 @@ class Topology:
                 return node
         return None
 
+    # Find ip of interface in node
     def get_node_ip(self, node_name, interface_id):
         node = self.get_node_info(node_name)
         if node is None:
@@ -149,6 +155,7 @@ class Topology:
                 return interface['ip']
         return None
 
+    # Find device name by ip
     def get_host_name_by_interface(self, addr):
         for node in self.topo['node']:
             if node['type'] == 'host' and addr == node['ip']:
