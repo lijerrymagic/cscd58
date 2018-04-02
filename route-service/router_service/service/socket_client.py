@@ -8,7 +8,7 @@ from router_service.db.router_table_client import RouterTableClient
 class SocketClient:
 
     def __init__(self, client_name=None, interfaces=None):
-        self.server_port = 10608
+        self.server_port = 5000
         self.client_name = client_name
         self.interfaces = interfaces
         self.scheduler = None

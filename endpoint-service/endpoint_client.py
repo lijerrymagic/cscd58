@@ -3,7 +3,7 @@ import json
 import sys
 
 class SocketClient:
-
+    '''a class represents end system client'''
     def __init__(self, client_ip=None, server_ip=None, server_port=None):
         self.client_ip = client_ip
         self.server_ip = server_ip
@@ -27,8 +27,9 @@ class SocketClient:
                 break
             clientsocket.sendto(self._init_formal_data(target_ip, message).encode(encoding='utf-8'), (self.server_ip, self.server_port))
             clientsocket.close()
-
+    
     def _init_register_data(self):
+        ''' data type 1 is the data used to broadcast to 255.255.255.255 to inform its existence'''
         data = {
             'nw_src': self.client_ip,
             'nw_dst': '255.255.255.255',
@@ -38,6 +39,7 @@ class SocketClient:
         return json.dumps(data)
 
     def _init_formal_data(self, target_ip, message):
+        ''' data type 2 is the data used to communicate between end systems'''
         data = {
             'nw_src': self.client_ip,
             'nw_dst': target_ip,

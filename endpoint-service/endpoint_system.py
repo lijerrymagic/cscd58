@@ -4,7 +4,6 @@ import sys
 import getopt
 from socket import *
 from endpoint_client import SocketClient
-from endpoint_server import EndPointServer
 from topology import Topology
 import json
 
@@ -49,6 +48,6 @@ if __name__ == '__main__':
             Usage()
             sys.exit(1)
         if o in '--server':
-            start_server(10608)
+            start_server(5000)
         if o in '--client':
-            start_client(a, 10608)
+            start_client(a, 5000)

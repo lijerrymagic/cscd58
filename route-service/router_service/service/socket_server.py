@@ -8,14 +8,14 @@ import json
 
 class SocketServer:
     def __init__(self):
-        self.server_port = 10608
+        self.server_port = 5000
         self.server_name = None
         self.router_socket_server = None
         self.router_table_db_client = None
         self.topology = Topology()
 
     def create_socket_server_instance(self, server_name):
-        print "**************create_socket_server"
+        print "**************create_socket_server***************"
         self.router_table_db_client = RouterTableClient(server_name)
         self.server_name = server_name
         self.create_socket_server()
