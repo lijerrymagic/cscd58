@@ -7,7 +7,7 @@ setup(
 
       description="Router Server module",
 
-      author="ZeyuLiZhuhaitao",
+      author="ZeyuLi&Zhuhaitao",
 
       url="",
 
