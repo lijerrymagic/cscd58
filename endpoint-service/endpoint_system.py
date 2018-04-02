@@ -8,6 +8,7 @@ from topology import Topology
 import json
 
 def Usage():
+    '''print usage information'''
     print 'endpoint_system.py usage'
     print '-h, --help: print help message'
     print '--server: run endpoint server'
@@ -15,10 +16,12 @@ def Usage():
 
 
 def start_server(port):
+    '''a function to start running the server'''
     ADDR = ('', port)
     server_socket = socket(AF_INET, SOCK_DGRAM)
     server_socket.bind(ADDR)
     print "end system waiting for message : "
+    # begin listening to messages sent by outher end systems
     while True:
         receive_data, receive_address = server_socket.recvfrom(1024)
         receive_data = json.loads(receive_data)
@@ -26,6 +29,8 @@ def start_server(port):
         print "end system receive data : " + json.dumps(receive_data)
 
 def start_client(client_name, port):
+    '''a function to start running client, broadcast to router its existence'''
+    # get the topo of current network frm topo class.
     topo = Topology()
     server_ip = topo.get_host_neighbor(client_name)['ip']
     client_ip = topo.get_node_info(client_name)['ip']

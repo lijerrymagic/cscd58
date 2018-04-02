@@ -4,13 +4,15 @@ import json
 import time
 from tinydb import TinyDB, where
 class RouterTableClient:
+    '''a class to store the forwarding table for each router'''
     def __init__(self, router_name):
         #self.dbfile = "/home/" + router_name + ".txt"
         self.router_db = TinyDB(router_name + '.data')
         self.router_name = router_name
         #self.create_db_file()
 
-    def get_all_router_table(self):
+    def get_forwarding_table(self):
+        '''retrieve the forwarding table for this router '''
         return self._process_read_router_table_db()
 
     def get_router_table_by_name(self, router_name):
@@ -58,7 +60,6 @@ class RouterTableClient:
             self.add_router_db_from_tinydb(add_router_item)
 
     def create_db_file(self):
-
         if not os.path.exists(self.dbfile):
             db_file = open(self.dbfile, 'w')
             db_file.close()

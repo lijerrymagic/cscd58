@@ -33,9 +33,7 @@ def main(argv):
             print "******"
             Usage()
             sys.exit(1)
-        if o in ('-i', '--info'):
-            Usage()
-            sys.exit(1)
+        # the opt to create the topo network by using the Network function same as Topo in mininet
         if o in ('-t', '--topo'):
             Network()
             sys.exit(1)
@@ -49,7 +47,7 @@ def main(argv):
             print 'unhandled option'
             sys.exit(3)
 
-    #get server ip list from config
+    # get server ip list from config
     if client_name is not None:
         router_client_infos = Topology().get_server_interfaces(client_name)
         if router_client_infos is None:
@@ -64,7 +62,7 @@ def main(argv):
     sys.exit(0)
 
 def arg_error(argv):
-    print '%s is valid' %argv
+    print '%s is invalid' %argv
 
 def output(argv):
     print argv

@@ -7,6 +7,7 @@ from topology import Topology
 import json
 
 class SocketServer:
+    '''A server runs in each router'''
     def __init__(self):
         self.server_port = 5000
         self.server_name = None
@@ -16,6 +17,7 @@ class SocketServer:
 
     def create_socket_server_instance(self, server_name):
         print "**************create_socket_server***************"
+        # create the forwarding table using the server_name
         self.router_table_db_client = RouterTableClient(server_name)
         self.server_name = server_name
         self.create_socket_server()
@@ -28,7 +30,7 @@ class SocketServer:
         #server_socket.settimeout(2)
         server_socket.bind(server_addr)
         self.router_socket_server = server_socket
-        print 'Router socket are waiting for connecting ......'
+        print 'Router socket are waiting for connection......'
         while True:
             receive_data, receive_address = server_socket.recvfrom(1024)
             print 'Connected by ', receive_address
@@ -38,11 +40,11 @@ class SocketServer:
         self.router_socket_server.close()
 
     def router_message_listener(self, message, receive_address):
-
+        '''a function that checks the data type and do operations respectively'''
         if message is not None and 'type' in message:
             message_type = message['type']
             if message_type == 1:
-                self._process_hand_host_online_message(message)
+                self._process_end_sys_online_message(message)
             elif message_type == 2:
                 self._process_send_forwarding_message(message)
             elif message_type == 3:
@@ -54,21 +56,21 @@ class SocketServer:
             router_info = json.dumps(router_info)
         else:
             router_info = "None"
-        print "router server send:", router_info
+        print "Router server send:", router_info
         self.router_socket_server.sendto(router_info, receive_address)
 
-    def _process_hand_host_online_message(self, message):
+    def _process_end_sys_online_message(self, message):
         router_item = {
             'nw_dst': message['nw_src'],
             'next_hop': None,
             #'related_router': self.server_name,
             'ttl': 1,
-            #'message': '参考RIP协议路由表项'
+            #'message': 'rip algo routing table'
         }
         self.router_table_db_client.update_router_table_by_name(self.server_name, router_item)
 
     def _process_send_forwarding_message(self, message):
-        #查看自己的路由表项，ttl最小的，转发
+        # check the forwarding table and forward message to which has the smallest ttl
         router_table = self.router_table_db_client.get_router_table_by_name(self.server_name)
         if 'item' not in router_table:
             return
