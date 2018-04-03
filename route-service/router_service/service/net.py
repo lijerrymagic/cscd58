@@ -13,7 +13,7 @@ def Network():
     print "*** Creating end system node"
     h1 = net.addHost('h1', ip='10.0.0.1/24')
     h2 = net.addHost('h2', ip='20.0.0.1/24')
-    h2 = net.addHost('h3', ip='30.0.0.1/24')
+    h3 = net.addHost('h3', ip='30.0.0.1/24')
     print "*** Creating router node"
     r1 = net.addHost('r1', ip='10.0.0.2/24')
 
