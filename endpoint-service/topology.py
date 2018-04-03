@@ -16,6 +16,12 @@ class Topology:
 
                 },
                 {
+                    'name': 'h3',
+                    'type': 'host',
+                    'ip': '30.0.0.1',
+
+                },
+                {
                     'name': 'r1',
                     'type': 'router',
                     'interface': [
@@ -28,7 +34,13 @@ class Topology:
                             'id': 2,
                             "name": 'r1-h2',
                             'ip': '20.0.0.2'
-                        }
+                        },
+                        {
+                            'id': 3,
+                            "name": 'r1-h3',
+                            'ip': '30.0.0.2'
+                        },
+
                     ]
                 }
             ],
@@ -44,6 +56,12 @@ class Topology:
                     'dst_node': 'r1',
                     'src_itf': '',
                     'dst_itf': 2
+                },
+                {
+                    'src_node': 'h3',
+                    'dst_node': 'r1',
+                    'src_itf': '',
+                    'dst_itf': 3
                 }
             ]
         }
