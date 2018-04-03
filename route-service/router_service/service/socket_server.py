@@ -23,7 +23,6 @@ class SocketServer:
         self.create_socket_server()
 
 
-
     def create_socket_server(self):
         server_addr = ("", self.server_port)
         server_socket = socket(AF_INET, SOCK_DGRAM)

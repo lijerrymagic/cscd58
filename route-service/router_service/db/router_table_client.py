@@ -1,7 +1,5 @@
 #encoding:utf-8
-import os
 import json
-import time
 from tinydb import TinyDB, where
 class RouterTableClient:
     '''a class to store the forwarding table for each router'''

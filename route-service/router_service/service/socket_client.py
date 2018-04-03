@@ -1,8 +1,5 @@
 from socket import *
 from apscheduler.schedulers.blocking import BlockingScheduler
-from datetime import datetime
-import time
-import os
 import json
 from router_service.db.router_table_client import RouterTableClient
 class SocketClient:
@@ -23,7 +20,7 @@ class SocketClient:
         # Add a scheduler for updating router every 10s
         self.scheduler = BlockingScheduler()
         self.scheduler.add_job(self.update_routers, 'cron', second='*/10', hour='*')
-        print 'Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C')
+        print 'Press Ctrl+C to exit'
         try:
             self.scheduler.start()
         except KeyboardInterrupt, SystemExit:
