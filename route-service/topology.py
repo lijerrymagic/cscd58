@@ -1,6 +1,5 @@
 #encoding:utf-8
 class Topology:
-    '''A topology class contains all hardcoding network configuration'''
     def __init__(self):
         self.topo = {
             'node': [
@@ -26,11 +25,53 @@ class Topology:
                         },
                         {
                             'id': 2,
-                            "name": 'r1-h2',
-                            'ip': '20.0.0.2'
+                            "name": 'r1-r2',
+                            'ip': '30.0.0.1'
+                        },
+                        {
+                            'id': 3,
+                            "name": 'r1-r3',
+                            'ip': '40.0.0.1'
                         }
                     ]
-                }
+                },
+                {
+                    'name': 'r2',
+                    'type': 'router',
+                    'interface': [
+                        {
+                            'id': 1,
+                            "name": 'r2-h2',
+                            'ip': '20.0.0.2'
+                        },
+                        {
+                            'id': 2,
+                            "name": 'r2-r1',
+                            'ip': '30.0.0.2'
+                        },
+                        {
+                            'id': 3,
+                            "name": 'r2-r3',
+                            'ip': '50.0.0.1'
+                        }
+                    ]
+                },
+                {
+                    'name': 'r3',
+                    'type': 'router',
+                    'interface': [
+                        {
+                            'id': 1,
+                            "name": 'r3-r1',
+                            'ip': '40.0.0.2'
+                        },
+                        {
+                            'id': 2,
+                            "name": 'r3-r2',
+                            'ip': '50.0.0.2'
+                        }
+                    ]
+                },
             ],
             'link': [
                 {
@@ -41,18 +82,35 @@ class Topology:
                 },
                 {
                     'src_node': 'h2',
-                    'dst_node': 'r1',
+                    'dst_node': 'r2',
                     'src_itf': '',
+                    'dst_itf': 1
+                },
+                {
+                    'src_node': 'r1',
+                    'dst_node': 'r2',
+                    'src_itf': 2,
                     'dst_itf': 2
-                }
+                },
+                {
+                    'src_node': 'r1',
+                    'dst_node': 'r3',
+                    'src_itf': 3,
+                    'dst_itf': 1
+                },
+                {
+                    'src_node': 'r2',
+                    'dst_node': 'r3',
+                    'src_itf': 3,
+                    'dst_itf': 2
+                },
             ]
         }
 
     def get_topology(self):
         return self.topo
-    
-    def get_server_interfaces(self, src_node_name):
 
+    def get_server_interfaces(self, src_node_name):
         links = self.topo['link']
         interface_list = []
         for link in links:
@@ -76,7 +134,6 @@ class Topology:
         return interface_list
 
     def get_node_info(self, node_name):
-        '''get the node whole information'''
         nodes = self.topo['node']
         for node in nodes:
             if node['name'] == node_name:
@@ -84,7 +141,6 @@ class Topology:
         return None
 
     def get_node_ip(self, node_name, interface_id):
-        ''' get the host ip address'''
         node = self.get_node_info(node_name)
         if node is None:
             return None
