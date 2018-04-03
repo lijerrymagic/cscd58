@@ -18,7 +18,7 @@ def Network():
     h5 = net.addHost('h5', ip='50.0.0.1/24')
     print "*** Creating router node"
     r1 = net.addHost('r1', ip='10.0.0.2/24')
-    r2 = net.addHost('r2', ip='20.0.0.2/24')
+    r2 = net.addHost('r2', ip='40.0.0.2/24')
 
     print "*** Creating links"
     net.addLink(h1, r1, intfName1='h1-r1', intfName2='r1-h1')
@@ -32,6 +32,7 @@ def Network():
     r1.cmd('ifconfig r1-h1 10.0.0.2 netmask 255.255.255.0')
     r1.cmd('ifconfig r1-h2 20.0.0.2 netmask 255.255.255.0')
     r1.cmd('ifconfig r1-h3 30.0.0.2 netmask 255.255.255.0')
+
     r2.cmd('ifconfig r2-h4 40.0.0.2 netmask 255.255.255.0')
     r2.cmd('ifconfig r2-h5 50.0.0.2 netmask 255.255.255.0')
 
