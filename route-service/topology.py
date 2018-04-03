@@ -26,7 +26,7 @@ class Topology:
                         },
                         {
                             'id': 2,
-                            "name": 'r1-r2',
+                            "name": 'r1-h2',
                             'ip': '20.0.0.2'
                         }
                     ]
