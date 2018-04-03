@@ -12,7 +12,7 @@ def Usage():
     print 'endpoint_system.py usage'
     print '-h, --help: print help message'
     print '--server: run endpoint server'
-    print '--client: run endpoint client'
+    print '--client=name: run endpoint client'
 
 
 def start_server(port):

@@ -12,9 +12,8 @@ def Usage():
     print 'RouterSocketClient.py usage:'
     print '-h,--help: print help message.'
     print '-t,--topo: create topology'
-    print '-i,--info: show router info'
-    print '-c,--client: create client'
-    print '-s,--server: create server'
+    print '--client=name: create client'
+    print '--server=name: create server'
 
 def main(argv):
     client_name = None
