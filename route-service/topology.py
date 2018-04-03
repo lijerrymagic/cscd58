@@ -22,6 +22,18 @@ class Topology:
 
                 },
                 {
+                    'name': 'h4',
+                    'type': 'host',
+                    'ip': '40.0.0.1',
+
+                },
+                {
+                    'name': 'h5',
+                    'type': 'host',
+                    'ip': '50.0.0.1',
+
+                },
+                {
                     'name': 'r1',
                     'type': 'router',
                     'interface': [
@@ -39,6 +51,33 @@ class Topology:
                             'id': 3,
                             "name": 'r1-h3',
                             'ip': '30.0.0.2'
+                        },
+                        {
+                            'id': 4,
+                            "name": 'r1-r2',
+                            'ip': '60.0.0.2'
+                        }
+
+                    ]
+                },
+                {
+                    'name': 'r2',
+                    'type': 'router',
+                    'interface': [
+                        {
+                            'id': 1,
+                            "name": 'r2-h4',
+                            'ip': '40.0.0.2'
+                        },
+                        {
+                            'id': 2,
+                            "name": 'r2-h5',
+                            'ip': '50.0.0.2'
+                        },
+                        {
+                            'id': 3,
+                            "name": 'r2-r1',
+                            'ip': '60.0.0.1'
                         },
 
                     ]
@@ -62,7 +101,26 @@ class Topology:
                     'dst_node': 'r1',
                     'src_itf': '',
                     'dst_itf': 3
+                },
+                {
+                    'src_node': 'h4',
+                    'dst_node': 'r2',
+                    'src_itf': '',
+                    'dst_itf': 1
+                },
+                {
+                    'src_node': 'h5',
+                    'dst_node': 'r2',
+                    'src_itf': '',
+                    'dst_itf': 2
+                },
+                {
+                    'src_node': 'r1',
+                    'dst_node': 'r2',
+                    'src_itf': 4,
+                    'dst_itf': 3
                 }
+
             ]
         }
 
