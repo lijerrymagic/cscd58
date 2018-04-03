@@ -27,52 +27,10 @@ class Topology:
                         {
                             'id': 2,
                             "name": 'r1-r2',
-                            'ip': '30.0.0.1'
-                        },
-                        {
-                            'id': 3,
-                            "name": 'r1-r3',
-                            'ip': '40.0.0.1'
-                        }
-                    ]
-                },
-                {
-                    'name': 'r2',
-                    'type': 'router',
-                    'interface': [
-                        {
-                            'id': 1,
-                            "name": 'r2-h2',
                             'ip': '20.0.0.2'
-                        },
-                        {
-                            'id': 2,
-                            "name": 'r2-r1',
-                            'ip': '30.0.0.2'
-                        },
-                        {
-                            'id': 3,
-                            "name": 'r2-r3',
-                            'ip': '50.0.0.1'
                         }
                     ]
-                },
-                {
-                    'name': 'r3',
-                    'type': 'router',
-                    'interface': [
-                        {
-                            'id': 1,
-                            "name": 'r3-r1',
-                            'ip': '40.0.0.2'
-                        },
-                        {
-                            'id': 2,
-                            "name": 'r3-r2',
-                            'ip': '50.0.0.2'
-                        }
-                    ]
-                },
+                }
             ],
             'link': [
                 {
@@ -83,28 +41,10 @@ class Topology:
                 },
                 {
                     'src_node': 'h2',
-                    'dst_node': 'r2',
+                    'dst_node': 'r1',
                     'src_itf': '',
-                    'dst_itf': 1
-                },
-                {
-                    'src_node': 'r1',
-                    'dst_node': 'r2',
-                    'src_itf': 2,
                     'dst_itf': 2
-                },
-                {
-                    'src_node': 'r1',
-                    'dst_node': 'r3',
-                    'src_itf': 3,
-                    'dst_itf': 1
-                },
-                {
-                    'src_node': 'r2',
-                    'dst_node': 'r3',
-                    'src_itf': 3,
-                    'dst_itf': 2
-                },
+                }
             ]
         }
 
