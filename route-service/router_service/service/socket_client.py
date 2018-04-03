@@ -18,8 +18,10 @@ class SocketClient:
 
     def create_socket_client_instance(self, interfaces):
         self.interfaces = interfaces
-        self.scheduler = BlockingScheduler()
+        # Connect socket
         self.client_socket = self.create_socket_client()
+        # Add a scheduler for updating router every 10s
+        self.scheduler = BlockingScheduler()
         self.scheduler.add_job(self.update_routers, 'cron', second='*/10', hour='*')
         print 'Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C')
         try:
@@ -36,8 +38,11 @@ class SocketClient:
     def destroy_socket_client(self, client_socket):
         client_socket.close()
 
+    # Update router table
     def update_routers(self):
+        # Set message
         request_context = self._process_message_context()
+        # For each connected router, send message
         for interface in self.interfaces:
             print "---------client send_data", json.dumps(request_context)
             self.process_send_message(self.client_socket, interface['nw_dst'], json.dumps(request_context))
@@ -51,7 +56,7 @@ class SocketClient:
                 print "No router information to update"
             else:
                 receive_data = json.loads(receive_data)
-
+                # If receive data, update its router table
                 for item in receive_data['item']:
                     router_item = {
                         'nw_dst': item['nw_dst'],
